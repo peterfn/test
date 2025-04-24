@@ -1,0 +1,526 @@
+/* Custom Properties - Setting up a consistent color scheme and spacing using CSS variables */
+:root {
+    --color-primary: #000000;          /* Primary brand color (black) */
+    --color-secondary: #1d1d1f;        /* Secondary color for backgrounds (very dark gray) */
+    --color-accent: #2997ff;           /* Accent color for interactive elements (bright blue) */
+    --color-text: #ffffff;             /* Primary text color (white) */
+    --color-text-secondary: #86868b;   /* Secondary text color for less important text (light gray) */
+    --color-background: #000000;       /* Main background color (black) */
+    --color-card: #1d1d1f;             /* Card background color (very dark gray) */
+    --color-card-hover: #2d2d2f;       /* Card hover state color (slightly lighter dark gray) */
+    --transition-speed: 0.3s;          /* Consistent transition speed for animations */
+    --spacing-unit: 1rem;              /* Base spacing unit for consistent layout rhythm */
+}
+
+/* Base Styles - Setting foundational styles for the entire document */
+body {
+    background-color: var(--color-background);   /* Setting the page background to black */
+    color: var(--color-text);                    /* Setting default text color to white */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;  /* System font stack for clean typography */
+    line-height: 1.6;                           /* Comfortable line height for readability */
+}
+
+.container {
+    max-width: 1200px;                          /* Maximum width of content areas */
+    margin: 0 auto;                             /* Center containers horizontally */
+    padding: 0 var(--spacing-unit);             /* Horizontal padding using the spacing variable */
+}
+
+/* Typography - Text styling for headings and special text elements */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;                           /* Semi-bold font weight for headings */
+    line-height: 1.2;                           /* Tighter line height for headings */
+    margin-bottom: var(--spacing-unit);         /* Bottom margin for spacing */
+}
+
+.section-title, .section-subtitle {
+    text-align: center;                         /* Center alignment for section titles */
+    margin: 4rem 0;                             /* Vertical margin for separation */
+    background: linear-gradient(135deg, #fff 0%, #86868b 100%);  /* Gradient background for text */
+    -webkit-background-clip: text;              /* Clip background to text shape (for webkit browsers) */
+    background-clip: text;                      /* Standard property for text clipping */
+    -webkit-text-fill-color: transparent;       /* Make text transparent to show gradient (for webkit) */
+}
+
+.section-title {
+    font-size: 3.5rem;                          /* Larger font size for primary titles */
+}
+
+.section-subtitle {
+    font-size: 2.5rem;                          /* Smaller size for secondary titles */
+    margin: 4rem 0 2rem;                        /* Custom margins for subtitles */
+}
+
+/* Navigation - Styling for the fixed navigation bar */
+.nav {
+    background-color: rgba(0, 0, 0, 0.8);       /* Semi-transparent black background */
+    backdrop-filter: blur(20px);                /* Blur effect for background (modern browsers) */
+    padding: 1rem;                              /* Padding around nav content */
+    position: fixed;                            /* Fix navigation to top of viewport */
+    width: 100%;                                /* Full width navigation */
+    top: 0;                                     /* Position at top of viewport */
+    z-index: 1000;                              /* High z-index to stay above other elements */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);  /* Subtle border for separation */
+}
+
+.nav-list {
+    display: flex;                              /* Horizontal layout for navigation items */
+    justify-content: center;                    /* Center the navigation items */
+    gap: 3rem;                                  /* Space between navigation items */
+}
+
+.nav-link {
+    color: var(--color-text);                   /* White text for navigation links */
+    font-weight: 500;                           /* Medium font weight for links */
+    transition: color var(--transition-speed);  /* Smooth transition for hover effect */
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--color-accent);                 /* Blue color on hover/active state */
+}
+
+/* Common Card Styles - Shared styles for all card-type elements */
+.feature-card, .tournament-card, .timeline-item, .stat-item {
+    background-color: var(--color-card);        /* Dark gray background for cards */
+    border-radius: 20px;                        /* Rounded corners for cards */
+    transition: all var(--transition-speed);    /* Smooth transition for hover effects */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border for definition */
+    overflow: hidden;                           /* Clip content to border radius */
+}
+
+.feature-card:hover, .tournament-card:hover, .timeline-item:hover, .stat-item:hover {
+    transform: translateY(-5px);                /* Slight upward movement on hover */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);  /* Shadow effect for depth */
+    border-color: var(--color-accent);          /* Accent color border on hover */
+}
+
+/* Hero Section - Styling for the full-screen homepage hero area */
+.hero {
+    position: relative;                         /* For positioning child elements */
+    height: 100vh;                              /* Full viewport height */
+    display: flex;                              /* Flexbox for centering content */
+    align-items: center;                        /* Vertical centering */
+    justify-content: center;                    /* Horizontal centering */
+    text-align: center;                         /* Center text */
+    color: white;                               /* Text color */
+    overflow: hidden;                           /* Hide overflow content */
+}
+
+.hero-image {
+    position: absolute;                         /* Absolute positioning for background image */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;                                /* Place behind other elements */
+}
+
+.hero-image img {
+    width: 100%;                                /* Full width */
+    height: 100%;                               /* Full height */
+    object-fit: cover;                          /* Cover positioning for image */
+}
+
+.hero-image::after {
+    content: '';                                /* Empty content for overlay */
+    position: absolute;                         /* Position over image */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4));  /* Gradient overlay for readability */
+}
+
+.hero-content {
+    position: relative;                         /* For proper stacking */
+    z-index: 1;                                 /* Place above background */
+    max-width: 800px;                           /* Limit content width */
+    padding: 0 20px;                            /* Horizontal padding */
+}
+
+.hero-title {
+    font-size: 4.5rem;                          /* Large size for hero title */
+    margin-bottom: 1.5rem;                      /* Bottom spacing */
+    background: linear-gradient(135deg, #fff 0%, #86868b 100%);  /* Text gradient effect */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-text {
+    font-size: 1.5rem;                          /* Larger size for hero description */
+    margin-bottom: 2.5rem;                      /* Bottom spacing */
+    color: var(--color-text-secondary);         /* Secondary color for subtitle */
+}
+
+/* Buttons - Styling for action buttons */
+.btn {
+    display: inline-block;                      /* Allow for padding */
+    padding: 1rem 2.5rem;                       /* Vertical and horizontal padding */
+    background-color: var(--color-accent);      /* Blue background */
+    color: var(--color-text);                   /* White text */
+    border: none;                               /* No border */
+    border-radius: 30px;                        /* Rounded corners */
+    cursor: pointer;                            /* Pointer cursor for clickable element */
+    transition: all var(--transition-speed);    /* Smooth transition for hover */
+    font-weight: 500;                           /* Medium font weight */
+    font-size: 1.1rem;                          /* Slightly larger text */
+}
+
+.btn:hover {
+    transform: translateY(-2px);                /* Slight upward movement on hover */
+    background-color: #0077ed;                  /* Darker blue on hover */
+    box-shadow: 0 4px 15px rgba(41, 151, 255, 0.3);  /* Glowing effect */
+}
+
+.btn-outline {
+    background-color: transparent;              /* Transparent background */
+    border: 2px solid var(--color-accent);      /* Blue border */
+    color: var(--color-accent);                 /* Blue text */
+}
+
+.btn-outline:hover {
+    background-color: var(--color-accent);      /* Blue background on hover */
+    color: var(--color-text);                   /* White text on hover */
+}
+
+/* Grid Layouts - Responsive grid layouts for various content sections */
+.features-grid, .tournaments-grid, .stats-grid {
+    display: grid;                              /* Grid display */
+    gap: 2rem;                                  /* Gap between grid items */
+    margin-top: 3rem;                           /* Top margin */
+}
+
+.features-grid, .tournaments-grid {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));  /* Responsive columns, minimum 350px width */
+}
+
+.stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));  /* Smaller minimum width for stats */
+    text-align: center;                         /* Center stat content */
+}
+
+/* Feature Cards - Styling for feature highlights with videos */
+.feature-card {
+    position: relative;                         /* For child positioning */
+    aspect-ratio: 16/9;                         /* 16:9 aspect ratio for videos */
+}
+
+.feature-video {
+    position: relative;                         /* For overlay positioning */
+    width: 100%;                                /* Full width */
+    height: 100%;                               /* Full height */
+}
+
+.feature-video iframe {
+    width: 100%;                                /* Full width iframe */
+    height: 100%;                               /* Full height iframe */
+    object-fit: cover;                          /* Cover positioning */
+}
+
+.feature-overlay {
+    position: absolute;                         /* Absolute position over video */
+    bottom: 0;                                  /* Align to bottom */
+    left: 0;
+    right: 0;
+    padding: 2rem;                              /* Padding for content */
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));  /* Gradient for readability */
+    color: var(--color-text);                   /* White text */
+    pointer-events: none;                       /* Allow clicking through to video */
+}
+
+/* Timeline - Styling for the game history timeline */
+.timeline-section, .tournaments-section, .stats-section {
+    padding: 6rem 0;                            /* Vertical padding */
+    background-color: var(--color-secondary);   /* Dark gray background */
+}
+
+.timeline {
+    position: relative;                         /* For vertical line positioning */
+    max-width: 1000px;                          /* Maximum width */
+    margin: 0 auto;                             /* Center horizontally */
+    padding: 2rem 0;                            /* Vertical padding */
+}
+
+.timeline::before {
+    content: '';                                /* Empty content for line */
+    position: absolute;                         /* Absolute positioning */
+    width: 2px;                                 /* Thin line */
+    background: var(--color-accent);            /* Blue line */
+    top: 0;
+    bottom: 0;
+    left: 50%;                                  /* Center line */
+    margin-left: -1px;                          /* Offset for exact centering */
+}
+
+.timeline-filters {
+    display: flex;                              /* Horizontal layout */
+    justify-content: center;                    /* Center horizontally */
+    gap: 1rem;                                  /* Space between filters */
+    margin-bottom: 3rem;                        /* Bottom margin */
+    flex-wrap: wrap;                            /* Allow wrapping on small screens */
+}
+
+.filter-btn {
+    padding: 0.8rem 1.5rem;                     /* Button padding */
+    background-color: var(--color-card);        /* Dark background */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+    border-radius: 30px;                        /* Rounded corners */
+    color: var(--color-text);                   /* White text */
+    cursor: pointer;                            /* Pointer cursor */
+    transition: all 0.3s;                       /* Smooth transition */
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background-color: var(--color-accent);      /* Blue background on hover/active */
+    border-color: var(--color-accent);          /* Blue border */
+    transform: translateY(-2px);                /* Slight lift */
+}
+
+.timeline-item {
+    position: relative;                         /* For positioning elements */
+    padding: 2rem;                              /* Inner padding */
+    margin-bottom: 3rem;                        /* Bottom margin between items */
+    width: calc(50% - 30px);                    /* 50% width minus margin */
+    opacity: 0;                                 /* Start invisible for animation */
+    transform: translateY(20px);                /* Start below final position for animation */
+}
+
+.timeline-item:nth-child(odd) {
+    left: 0;                                    /* Left side items */
+    margin-left: auto;                          /* Push to right of container */
+}
+
+.timeline-item:nth-child(even) {
+    left: 0%;                                   /* Right side items */
+}
+
+.timeline-item::before {
+    content: '';                                /* Empty content for dot */
+    position: absolute;                         /* Absolute position */
+    width: 20px;                                /* Dot width */
+    height: 20px;                               /* Dot height */
+    background: var(--color-accent);            /* Blue dot */
+    border-radius: 50%;                         /* Round shape */
+    top: 50%;                                   /* Vertical center */
+    transform: translateY(-50%);                /* Perfect vertical centering */
+}
+
+.timeline-item:nth-child(odd)::before {
+    right: -40px;                               /* Position dot on right for left items */
+}
+
+.timeline-item:nth-child(even)::before {
+    left: -40px;                                /* Position dot on left for right items */
+}
+
+.timeline-item.visible {
+    opacity: 1;                                 /* Fully visible when active */
+    transform: translateY(0);                   /* Final position when active */
+}
+
+.timeline-image img, .tournament-image img {
+    width: 100%;                                /* Full width */
+    height: 200px;                              /* Fixed height */
+    object-fit: cover;                          /* Cover positioning */
+}
+
+.timeline-date, .tournament-date {
+    color: var(--color-accent);                 /* Blue text for dates */
+    font-weight: 600;                           /* Semi-bold weight */
+    font-size: 1.1rem;                          /* Slightly larger text */
+    margin-bottom: 0.5rem;                      /* Bottom spacing */
+}
+
+.tournament-date {
+    padding: 1rem;                              /* Extra padding for tournament dates */
+    background-color: rgba(41, 151, 255, 0.1);  /* Semi-transparent blue background */
+}
+
+/* Tournament Cards - Styling for tournament listings */
+.tournament-card h3 {
+    padding: 1rem;                              /* Inner padding */
+    margin: 0;                                  /* Remove default margin */
+    font-size: 1.5rem;                          /* Larger text */
+}
+
+.tournament-prize {
+    color: var(--color-accent);                 /* Blue text for prize */
+    font-weight: 600;                           /* Semi-bold weight */
+    padding: 0 1rem;                            /* Horizontal padding */
+    margin-bottom: 1rem;                        /* Bottom spacing */
+}
+
+.tournament-details {
+    padding: 1rem;                              /* Inner padding */
+}
+
+.tournament-details p {
+    color: var(--color-text-secondary);         /* Gray text */
+    margin-bottom: 1rem;                        /* Bottom spacing */
+}
+
+.tournament-info {
+    list-style: none;                           /* Remove list bullets */
+    padding: 0;                                 /* Remove padding */
+    margin: 0;                                  /* Remove margin */
+}
+
+.tournament-info li {
+    color: var(--color-text-secondary);         /* Gray text */
+    margin-bottom: 0.5rem;                      /* Space between items */
+}
+
+.tournament-card.past {
+    opacity: 0.8;                               /* Slightly faded for past tournaments */
+}
+
+.tournament-card.past:hover {
+    opacity: 1;                                 /* Full opacity on hover */
+}
+
+/* Stats - Styling for statistics display */
+.stat-item {
+    padding: 2rem;                              /* Inner padding */
+}
+
+.stat-number {
+    font-size: 3rem;                            /* Large font for numbers */
+    font-weight: 700;                           /* Bold weight */
+    color: var(--color-accent);                 /* Blue text */
+    margin-bottom: 0.5rem;                      /* Bottom spacing */
+}
+
+.stat-label {
+    color: var(--color-text-secondary);         /* Gray text for labels */
+    font-size: 1.1rem;                          /* Slightly larger text */
+}
+
+/* Newsletter Section - Styling for newsletter signup */
+.newsletter-section {
+    padding: 6rem 0;                            /* Vertical padding */
+    background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);  /* Gradient background */
+}
+
+.newsletter-content {
+    max-width: 600px;                           /* Maximum width */
+    margin: 0 auto;                             /* Center horizontally */
+    text-align: center;                         /* Center text */
+}
+
+.newsletter-form {
+    display: flex;                              /* Horizontal layout */
+    gap: 1rem;                                  /* Space between fields */
+    margin-top: 2rem;                           /* Top margin */
+}
+
+.newsletter-form input {
+    flex: 1;                                    /* Take available space */
+    padding: 1rem 1.5rem;                       /* Inner padding */
+    border: none;                               /* No border */
+    border-radius: 30px;                        /* Rounded corners */
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+    color: var(--color-text);                   /* White text */
+}
+
+/* Footer - Styling for page footer */
+.footer-content {
+    display: grid;                              /* Grid layout */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));  /* Responsive columns */
+    gap: 3rem;                                  /* Space between columns */
+    margin-bottom: 3rem;                        /* Bottom margin */
+}
+
+.footer-section h3 {
+    color: var(--color-accent);                 /* Blue headings */
+    margin-bottom: 1.5rem;                      /* Bottom spacing */
+}
+
+.footer-section ul {
+    list-style: none;                           /* Remove list bullets */
+}
+
+.footer-section ul li {
+    margin-bottom: 0.8rem;                      /* Space between items */
+}
+
+.footer-section ul li a {
+    color: var(--color-text-secondary);         /* Gray text */
+    transition: color var(--transition-speed);  /* Smooth transition */
+}
+
+.footer-section ul li a:hover {
+    color: var(--color-accent);                 /* Blue text on hover */
+}
+
+.footer-bottom {
+    text-align: center;                         /* Center text */
+    padding-top: 2rem;                          /* Top padding */
+    border-top: 1px solid rgba(255, 255, 255, 0.1);  /* Subtle top border */
+}
+
+/* Animations - Reusable animation styles */
+.fade-in {
+    animation: fadeIn 0.8s ease-out forwards;   /* Apply fade-in animation */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;                             /* Start invisible */
+        transform: translateY(20px);            /* Start below final position */
+    }
+    to {
+        opacity: 1;                             /* End fully visible */
+        transform: translateY(0);               /* End at final position */
+    }
+}
+
+/* Responsive Design - Media queries for different screen sizes */
+@media (max-width: 768px) {
+    .nav-list {
+        flex-direction: column;                 /* Stack navigation vertically on mobile */
+        align-items: center;                    /* Center items */
+        gap: 1rem;                              /* Reduced spacing */
+    }
+
+    .hero-title {
+        font-size: 2.5rem;                      /* Smaller title on mobile */
+    }
+
+    .hero-text {
+        font-size: 1.2rem;                      /* Smaller text on mobile */
+    }
+
+    .timeline::before {
+        left: 30px;                             /* Move timeline line to left on mobile */
+    }
+
+    .timeline-filters {
+        flex-direction: column;                 /* Stack filters vertically */
+        align-items: center;                    /* Center items */
+    }
+
+    .filter-btn {
+        width: 100%;                            /* Full width buttons */
+        max-width: 200px;                       /* Maximum width */
+    }
+
+    .timeline-item {
+        width: calc(100% - 60px);               /* Full width minus margin */
+        margin-left: 60px;                      /* Left margin for timeline */
+        left: 0 !important;                     /* Override left/right positioning */
+    }
+
+    .timeline-item::before {
+        left: -40px !important;                 /* Force dots to left side */
+    }
+
+    .newsletter-form, .hero-buttons {
+        flex-direction: column;                 /* Stack form elements vertically */
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;             /* Single column footer */
+        text-align: center;                     /* Center text */
+    }
+}
